@@ -1,0 +1,17 @@
+.App {
+  
+}
+#main {
+
+
+}
+
+h1 {
+    background-color: yellowgreen;
+    padding: 30px;
+    margin: auto;
+    text-align: center;
+    font-size: 3em;
+    color: aliceblue;
+    font-family: 'Montserrat', sans-serif;
+}
