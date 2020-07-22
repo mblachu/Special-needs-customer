@@ -34,18 +34,20 @@ class Form extends React.Component {
         fetch('http://localhost:9000/api', {
             method: 'POST', headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ original: this.state.original, answer: this.state.answer, wish: this.state.wish, color_patern: colorPatern })
-        })
+        });
         this.setState({
             original: '',
             answer: '',
             wish: ''
         });
+        this.props.handleFormVisible();
     }
 
 
     render() {
+        const displayForm = this.props.isVissible === 'yes' ? 'formVisible' : 'formNotVisible';
         return (
-            <div>
+            <div className={displayForm} >
                 <h2>Add your own 'favourite' customer</h2>               
                 <textarea onChange={this.handleOrginal} className="form-message" value={this.state.original} name="originalo" placeholder="Place your original text here"></textarea>
                 <textarea onChange={this.handleAnswer} className="form-message" value={this.state.answer} name="answer" placeholder="Place your original answer here"></textarea>

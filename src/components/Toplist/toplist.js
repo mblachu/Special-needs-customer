@@ -1,41 +1,43 @@
 import React from 'react';
 import './toplist.css';
 import Comment from '../Comment/comment.js';
+import Form from '../form/form.js';
 
 class Toplist extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { sortBy: "recent" }
+        this.state = {
+            sortBy: "recent",
+            isVissible: 'no'
+        }
+
         this.handleSortRated = this.handleSortRated.bind(this);
         this.handleSortRecent = this.handleSortRecent.bind(this);
+        this.handleAddOwnComment = this.handleAddOwnComment.bind(this);
     }
 
 
     handleSortRated() {
-       // this.setState({ sortBy: "rated" });
         this.props.handleSorting("rated");
-
-        fetch('http://localhost:9000/api').then(response => {
-            if (response.ok) {
-                return response.json();
-            } throw new Error('Request failed!');
-        }, networkError => { console.log(networkError.message) })
-            .then(jsonResponse => {
-                console.log(jsonResponse.comments);
-                return jsonResponse
-            })
     }
     handleSortRecent() {
-        //this.setState({ sortBy: "recent" })
         this.props.handleSorting("recent");
     }
 
+    handleAddOwnComment() {
+        const isVissibleState = this.state.isVissible === 'no' ? 'yes' : 'no';
+        this.setState({ isVissible: isVissibleState });
+    }
+
     render() {
+
         return (
             <div>
                 <div id="buttons">
                     <button onClick={this.handleSortRated}>Sort by top rated</button>
                     <button onClick={this.handleSortRecent}>Sort by recent</button>
+                    <button onClick={this.handleAddOwnComment}>Add your own comment</button>
+                    <Form isVissible={this.state.isVissible} handleFormVisible={this.handleAddOwnComment}/>
                 </div>
             <div id="toplist">
                 {this.props.comments.map(comment => {
