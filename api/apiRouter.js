@@ -7,16 +7,18 @@ const db = new sqlite3.Database('./commentsDataBase.sqlite');
 
 
 apiRouter.get('/', (req, res, next) => {
+    console.log(req.query.sortBy);
 
-    db.all("SELECT * FROM Comments", (err, rows) => {
-        res.status(200).send({comments: rows})
-    })
-});
+    if (req.query.sortBy == 'recent') {
+        db.all("SELECT * FROM Comments ORDER BY id DESC", (err, rows) => {
+            res.status(200).send({ comments: rows })
+        })
+    } else {
+        db.all("SELECT * FROM Comments ORDER BY likes DESC LIMIT 5", (err, rows) => {
+            res.status(200).send({ comments: rows })
+        })}
 
-apiRouter.get('/:commentId', (req, res, next) => {
-    db.get(`SELECT * FROM Comments WHERE id = ${req.params.commentId}`, (err, row) => {
-        res.status(200).send({ comment: row })
-    })
+  
 });
 
 
@@ -30,9 +32,21 @@ apiRouter.post('/', (req, res, next) => {
         },
 
         (err, row) => {
-       
-    })
-})
+
+        })
+});
+
+apiRouter.put('/:commentId/addlike', (req, res, next) => {
+    console.log(req.params.commentId);
+    console.log(req.body.likes);
+    db.run("UPDATE Comments SET likes = $likes WHERE Comments.id = $id ",
+        {
+            $likes: req.body.likes,
+            $id: req.params.commentId
+        }, (err, row) => {
+            res.status(201).send();
+        })
+});
 
 
 module.exports = apiRouter;

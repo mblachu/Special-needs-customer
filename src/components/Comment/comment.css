@@ -1,12 +1,12 @@
 #comment {
-    position: relative;
+    flex: 0 0 auto;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
     width: 400px;
     overflow: hidden;
-    margin: 10px 10px;
+    margin: 8px;
 }
 
 #original {
@@ -80,4 +80,18 @@
 }
 .pattern4#tear {
     background-image: url("../../Photoshop/blacktearpattern2.png");
+}
+
+#like {
+    width: 70px;
+    margin: 20px auto 0 auto;
+    background-image: url("../../Photoshop/likebutton.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 30px;
+}
+
+#like:hover {
+    cursor: pointer;
 }

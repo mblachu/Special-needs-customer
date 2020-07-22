@@ -1,20 +1,16 @@
 #toplist {
-    /*position: relative;
+
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    flex-wrap: wrap;
-    margin: auto;
-    width: 70%;
-    height: 1600px;*/
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: start;
-    align-content: start;
+    align-content: center;
     width: 75%;
     margin: auto;
     text-align: center;
+    height: 1800px;
+  
 }
 
 #buttons {
